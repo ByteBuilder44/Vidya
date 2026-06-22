@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Janamdin Mubarak - Luxury Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --dark-gold: #996515;
+            --black: #0a0a0a;
+        }
+
+        body {
+            background-color: var(--black);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-luxury { font-family: 'Cinzel', serif; }
+        .font-script { font-family: 'Great Vibes', cursive; }
+
+        #canvas-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+        }
+
+        .gold-text {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.4));
+        }
+
+        /* Responsive Frame */
+        .image-frame {
+            position: relative;
+            padding: 8px;
+            background: linear-gradient(145deg, #d4af37, #996515);
+            border-radius: 8px;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+            transition: all 0.6s ease;
+            width: 100%;
+            max-width: 280px; /* Mobile default */
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .image-frame { max-width: 350px; padding: 12px; }
+        }
+
+        @media (min-width: 1024px) {
+            .image-frame { max-width: 400px; transform: perspective(1000px) rotateY(-5deg); }
+            .image-frame:hover { transform: perspective(1000px) rotateY(0deg) scale(1.05); }
+        }
+
+        .image-frame img {
+            width: 100%; height: auto;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, #fff, #d4af37);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn-gold {
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 12px 28px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.4s;
+            background: transparent;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        @media (min-width: 768px) {
+            .btn-gold { padding: 14px 35px; letter-spacing: 4px; font-size: 1rem; }
+        }
+
+        .btn-gold:hover {
+            background: var(--gold);
+            color: black;
+            box-shadow: 0 0 25px var(--gold);
+        }
+
+        .shayeri-box {
+            border-left: 2px solid var(--gold);
+            padding-left: 15px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        @media (min-width: 768px) {
+            .shayeri-box { padding-left: 25px; }
+        }
+
+        .date-display {
+            font-size: 2.5rem;
+            letter-spacing: 5px;
+            border-bottom: 2px solid var(--gold);
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .date-display { font-size: 4rem; letter-spacing: 10px; }
+        }
+
+        .countdown-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .countdown-item {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 8px;
+            min-width: 65px;
+            background: rgba(0,0,0,0.5);
+        }
+
+        @media (min-width: 768px) {
+            .countdown-item { padding: 15px; min-width: 100px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+
+    <!-- 1. Hero Section -->
+    <section class="min-h-screen flex flex-col items-center justify-center p-4 text-center">
+        <h2 class="font-luxury text-[10px] md:text-lg tracking-[0.4em] md:tracking-[0.6em] gold-text mb-4 reveal">ESTABLISHED 2007</h2>
+        <div class="w-16 md:w-20 h-[1px] bg-gold/50 mb-8 md:mb-10 reveal"></div>
+        <h1 class="font-script text-5xl sm:text-7xl md:text-9xl gold-text reveal">Happy Birthday</h1>
+        <p class="font-luxury text-sm md:text-xl mt-4 md:mt-6 tracking-[0.2em] reveal">Meri Jaan</p>
+        <div class="mt-12 animate-bounce opacity-40">
+            <svg class="w-5 h-5 md:w-6 md:h-6 text-gold mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 14l-7 7-7-7"></path></svg>
+        </div>
+    </section>
+
+    <!-- 2. The Patna & WhatsApp Memory Shayeri -->
+    <section class="min-h-[80vh] flex items-center justify-center py-16 px-6">
+        <div class="max-w-3xl w-full reveal">
+            <h3 class="font-luxury text-gold text-center md:text-left mb-8 tracking-widest text-sm md:text-xl uppercase">The First Meeting</h3>
+            <div class="shayeri-box">
+                <p class="text-lg md:text-3xl text-gray-200 leading-relaxed">
+                    "Patna ki woh dopahar, dhoop mein khila ek chehra tha,<br class="hidden md:block">
+                    Pehli mulaqat ka woh manzar, dil mein gehra tha.<br class="hidden md:block">
+                    Baatein toh WhatsApp par shuru hui thi silsila bankar,<br class="hidden md:block">
+                    Par kise pata tha, wahi pal meri zindagi ka sabse sunhera tha."
+                </p>
+            </div>
+            <p class="text-right font-script text-2xl md:text-4xl gold-text mt-4">- Sirf Tumhare Liye</p>
+        </div>
+    </section>
+
+    <!-- 3. The Only Photo Section -->
+    <section class="min-h-screen flex items-center justify-center py-16 px-6 bg-[#050505]/50">
+        <div class="w-full reveal text-center">
+            <div class="image-frame">
+                <!-- PHOTO:  -->
+                <img src="vidya.jpg" alt="Special Memory">
+            </div>
+            <p class="mt-8 font-luxury text-gold tracking-[0.2em] text-[10px] md:text-sm opacity-80 uppercase italic">
+                Ek chehra, jo mera sukoon hai
+            </p>
+        </div>
+    </section>
+
+    <!-- 4. Birthday Date & Countdown -->
+    <section class="min-h-screen flex flex-col items-center justify-center py-16 px-6 text-center">
+        <div class="reveal">
+            <p class="font-luxury text-gold tracking-widest mb-4 text-xs md:text-sm">CELEBRATING SINCE 2007</p>
+            <div class="date-display font-luxury gold-text">23 JUNE</div>
+            <p class="text-gray-400 font-luxury tracking-[0.1em] mt-2 text-[10px] md:text-sm">Awaiting June 23, 2026</p>
+        </div>
+
+        <!-- Real Countdown -->
+        <div id="countdown" class="countdown-container mt-10 reveal font-luxury">
+            <div class="countdown-item"><div id="days" class="text-xl md:text-3xl gold-text font-bold">00</div><div class="text-[8px] md:text-[10px] text-gray-500 uppercase">Days</div></div>
+            <div class="countdown-item"><div id="hours" class="text-xl md:text-3xl gold-text font-bold">00</div><div class="text-[8px] md:text-[10px] text-gray-500 uppercase">Hours</div></div>
+            <div class="countdown-item"><div id="mins" class="text-xl md:text-3xl gold-text font-bold">00</div><div class="text-[8px] md:text-[10px] text-gray-500 uppercase">Mins</div></div>
+            <div class="countdown-item"><div id="secs" class="text-xl md:text-3xl gold-text font-bold">00</div><div class="text-[8px] md:text-[10px] text-gray-500 uppercase">Secs</div></div>
+        </div>
+
+        <div class="max-w-2xl w-full mt-16 md:mt-24 reveal">
+            <div class="shayeri-box border-r-2 border-l-0 pr-4 md:pr-6 pl-0 text-right">
+                <p class="text-lg md:text-3xl text-gray-300 italic font-light leading-relaxed">
+                    "2007 ka woh saal ek tohfa laya tha,<br class="hidden md:block">
+                    Khuda ne zameen par apna noor barsaya tha.<br class="hidden md:block">
+                    Har June ki 23 tarikh gawah hai is baat ki,<br class="hidden md:block">
+                    Ki maine tujh mein apna poora jahaan paya hai."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Final Message & Button -->
+    <section class="min-h-screen flex flex-col items-center justify-center p-6 text-center bg-gradient-to-t from-[#0d0d0d] to-black">
+        <div class="reveal w-full max-w-2xl">
+            <h3 class="font-luxury text-lg md:text-2xl gold-text mb-8 md:mb-12 tracking-[0.3em]">Forever Yours</h3>
+            <div class="p-6 md:p-12 border border-yellow-900/20 bg-black/50 backdrop-blur-md mb-10 md:mb-12">
+                <p class="text-gray-400 text-sm md:text-xl italic leading-relaxed">
+                    "Tumhara saath Patna ki us dhoop se shuru hokar, meri zindagi ki aakhri saans tak rahega. Har birthday par mera pyar tumhare liye aur bhi zyada premium hota jayega."
+                </p>
+            </div>
+            <button onclick="surprise(event)" class="btn-gold">Unlock My Heart</button>
+        </div>
+        <div id="final" class="hidden mt-10">
+            <p class="font-script text-4xl md:text-7xl gold-text animate-pulse">I Love You! ❤️</p>
+        </div>
+    </section>
+
+    <script>
+        // Particles
+        const container = document.getElementById('canvas-container');
+        function createParticle() {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const size = Math.random() * 2 + 1;
+            p.style.width = size + 'px';
+            p.style.height = size + 'px';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.top = Math.random() * 100 + 'vh';
+            container.appendChild(p);
+            p.animate([
+                { transform: 'translateY(0)', opacity: 0.4 },
+                { transform: 'translateY(-100px)', opacity: 0 }
+            ], { duration: Math.random() * 3000 + 3000, iterations: Infinity });
+        }
+        for(let i=0; i<40; i++) createParticle();
+
+        // Reveal logic
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 50) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.onload = () => {
+            reveal();
+            startCountdown();
+        };
+
+        // Countdown Timer to June 23, 2026
+        function startCountdown() {
+            const targetDate = new Date("June 23, 2026 00:00:00").getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const diff = targetDate - now;
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+                if(document.getElementById("days")) {
+                    document.getElementById("days").innerText = days.toString().padStart(2, '0');
+                    document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+                    document.getElementById("mins").innerText = mins.toString().padStart(2, '0');
+                    document.getElementById("secs").innerText = secs.toString().padStart(2, '0');
+                }
+            }, 1000);
+        }
+
+        // Surprise
+        function surprise(e) {
+            document.getElementById('final').classList.remove('hidden');
+            const rect = e.target.getBoundingClientRect();
+            for(let i=0; i<40; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = (rect.left + rect.width/2) + 'px';
+                p.style.top = (rect.top + rect.height/2) + 'px';
+                p.style.width = '4px'; p.style.height = '4px';
+                p.style.background = 'gold';
+                p.style.zIndex = '100';
+                document.body.appendChild(p);
+                const angle = Math.random() * Math.PI * 2;
+                const dist = Math.random() * 200 + 50;
+                p.animate([
+                    { transform: 'translate(0, 0)', opacity: 1 },
+                    { transform: `translate(${Math.cos(angle) * dist}px, ${Math.sin(angle) * dist}px)`, opacity: 0 }
+                ], { duration: 1500, easing: 'ease-out' }).onfinish = () => p.remove();
+            }
+        }
+    </script>
+</body>
+</html>
